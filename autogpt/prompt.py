@@ -38,6 +38,9 @@ def get_prompt() -> str:
     prompt_generator.add_constraint(
         'Exclusively use the commands listed in double quotes e.g. "command name"'
     )
+    prompt_generator.add_constraint(
+        'Command should never be empty. Refrain from executing the command with arguments that have previously been used for the same command.'
+    )
 
     # Define the command list
     commands = [
@@ -106,9 +109,6 @@ def get_prompt() -> str:
         )
 
     # Add these command last.
-    commands.append(
-        ("Do Nothing", "do_nothing", {}),
-    )
     commands.append(
         ("Task Complete (Shutdown)", "task_complete", {"reason": "<reason>"}),
     )
